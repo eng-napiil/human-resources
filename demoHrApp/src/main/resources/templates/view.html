@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+  <meta charset="UTF-8">
+  <title>Hr</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-dark text-white">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">HrApp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="Register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="All">View</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<h1>List All Registered</h1>
+<h1>Searching Employee List</h1>
+<form>
+  <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+  &nbsp;
+  <input type="submit" value="Search" />
+  &nbsp;
+  <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+</form>
+<script type="text/javascript"> function clearSearch() {
+window.location = "[[@{/All}]]";
+}
+</script>
+
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Department</th>
+    <th scope="col">Gender</th>
+    <th scope="col">Hire Date</th>
+    <th scope="col">Job Title</th>
+    <th scope="col">Phone Number</th>
+    <th scope="col">Salary</th>
+    <th scope="col">Email</th>
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="hrModel :${employees}">
+    <td th:text="${hrModel.id}"></td>
+    <td th:text="${hrModel.name}"></td>
+    <td th:text="${hrModel.department}"></td>
+    <td th:text="${hrModel.gender}"></td>
+    <td th:text="${hrModel.hireDate}"></td>
+    <td th:text="${hrModel.jobTitle}"></td>
+    <td th:text="${hrModel.phoneNumber}"></td>
+    <td th:text="${hrModel.salary}"></td>
+    <td th:text="${hrModel.email}"></td>
+    <td>
+      <a th:href="@{/delete/{id}(id=${hrModel.id})}">
+        <button type="button" class="btn btn-danger">
+          <i class="bi bi-trash"></i>
+        </button>
+    </a>
+      <a th:href="@{/Edit/{id}(id=${hrModel.id})}"><button type="submit" class="btn btn-primary">
+        <i class="bi bi-pencil-square"></i>
+      </button></a>
+    </td>
+
+  </tr>
+  </tbody>
+</table>
+
+
+<footer class="bg-dark text-white py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>About HrApp</h5>
+        <p>HrApp is a comprehensive human resources management application that helps businesses streamline their HR processes.</p>
+      </div>
+      <div class="col-md-3">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="/" class="text-white">Home</a></li>
+          <li><a href="Register" class="text-white">Register</a></li>
+          <li><a href="All" class="text-white">View</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h5>Contact Us</h5>
+        <ul class="list-unstyled">
+          <li>Email: info@hrapp.com</li>
+          <li>Phone: 0617070500</li>
+          <li>Address: Muqdisho somalia</li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <div class="text-center">
+      <p>&copy; 2024 HrApp. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
